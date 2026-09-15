@@ -1,0 +1,321 @@
+{
+ "lace-pants": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "lace-pants-pink": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "lace-pants-detail": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "lace-pants-charcoal": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "lace-pants-black": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "baby-wrapper": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "baby-wrapper-dino": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "baby-wrapper-stripe": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "baby-wrapper-floral": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 0.8
+ },
+ "cozy-rompers": {
+  "widths": [
+   320
+  ],
+  "ratio": 0.7987
+ },
+ "soft-girl-set": {
+  "widths": [
+   320
+  ],
+  "ratio": 0.7987
+ },
+ "lilac-bellies": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "lilac-bellies-side": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "ivory-ballies": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "ivory-ballies-side": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "black-bow-ballies": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "black-bow-ballies-side": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "silver-ballies": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "silver-ballies-side": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "cream-laceup": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "cream-laceup-side": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "cream-bow-strap": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "cream-bow-strap-side": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 0.8
+ },
+ "hero-lilac": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 1.0
+ },
+ "hero-pants": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 1.0
+ },
+ "hero-wrapper": {
+  "widths": [
+   320,
+   480,
+   640,
+   1280
+  ],
+  "ratio": 1.0
+ },
+ "hero-bow": {
+  "widths": [
+   320,
+   480,
+   640
+  ],
+  "ratio": 1.0
+ },
+ "store-front": {
+  "widths": [
+   320
+  ],
+  "ratio": 0.7987
+ },
+ "store-hello": {
+  "widths": [
+   320
+  ],
+  "ratio": 0.7987
+ },
+ "shoe-wall": {
+  "widths": [
+   320,
+   480
+  ],
+  "ratio": 0.8
+ },
+ "hl-summer-coll": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-summer": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-school-bags": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-lunch-box": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-water-bottle": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-christmas": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-sneakers": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-winter": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-new-location": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "hl-anniversary": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ },
+ "logo": {
+  "widths": [
+   150,
+   300
+  ],
+  "ratio": 1
+ }
+}

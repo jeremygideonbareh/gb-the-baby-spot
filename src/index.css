@@ -1,0 +1,201 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #fff8ef;
+  --color-paper: #fffdf9;
+  --color-blush: #f6dce4;
+  --color-blush-deep: #e9b8c7;
+  --color-gold: #c79a2e;
+  --color-gold-deep: #8a6814;
+  --color-mint: #a9d8c8;
+  --color-mint-soft: #dff1ea;
+  --color-sage: #9fb693;
+  --color-sage-soft: #e5ecdf;
+  --color-cocoa: #4a3a2e;
+  --color-cocoa-soft: #6e5a4b;
+  --color-order: #1e7f4f;
+  --color-order-deep: #166a41;
+
+  --font-display: 'Fraunces Variable', 'Georgia', serif;
+  --font-sans: 'Nunito Variable', ui-rounded, 'Segoe UI', system-ui, sans-serif;
+
+  --radius-blob: 2rem;
+  --shadow-soft: 0 1px 2px rgb(74 58 46 / 0.06), 0 8px 24px -8px rgb(74 58 46 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(74 58 46 / 0.08), 0 18px 40px -12px rgb(74 58 46 / 0.22);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-cream font-sans text-cocoa antialiased;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-cocoa;
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+  }
+  h1,
+  h2 {
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
+  }
+  ::selection {
+    background: var(--color-blush);
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-sm font-bold tracking-wide text-gold-deep uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Tap squish for every button-like control */
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-base font-bold whitespace-nowrap transition-[transform,background-color,box-shadow] duration-150 ease-out select-none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active {
+    transform: scale(0.95);
+  }
+  .btn-order {
+    @apply bg-order text-white shadow-soft hover:bg-order-deep;
+  }
+  .btn-soft {
+    @apply bg-paper text-cocoa ring-1 ring-cocoa/15 hover:bg-white hover:ring-cocoa/30;
+  }
+  .btn-icon {
+    @apply inline-flex size-12 items-center justify-center rounded-full transition-transform duration-150 active:scale-90;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .chip {
+    @apply inline-flex min-h-11 items-center rounded-full bg-paper px-4 text-[0.95rem] font-bold whitespace-nowrap text-cocoa ring-1 ring-cocoa/15 transition-[transform,background-color] duration-150 hover:ring-cocoa/35 active:scale-95;
+  }
+  .chip[aria-pressed='true'] {
+    @apply bg-cocoa text-cream ring-cocoa hover:ring-cocoa;
+  }
+
+  .demo-tag {
+    @apply ml-1.5 inline-block rounded-full bg-[#f3e6c4] px-2 py-0.5 align-middle font-sans text-[0.72rem] font-bold tracking-wide text-[#5e470c] uppercase;
+  }
+}
+
+/* Load-time motion is CSS so it plays with the first paint (under a second) */
+.logo-pop {
+  animation: logo-pop 0.55s cubic-bezier(0.34, 1.8, 0.64, 1) both;
+}
+@keyframes logo-pop {
+  from {
+    transform: scale(0.6) rotate(-12deg);
+  }
+}
+.hero-photo {
+  animation: hero-settle 0.7s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+}
+@keyframes hero-settle {
+  from {
+    translate: 0 14px;
+    scale: 0.94;
+  }
+}
+
+/* Skip rendering work for sections far below the fold until they're near */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
+
+/* Category marquee */
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Native swipe rows on phones */
+.swipe-row {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.swipe-row::-webkit-scrollbar {
+  display: none;
+}
+.swipe-row > * {
+  scroll-snap-align: start;
+}
+
+/* Bottom sheet dialog */
+dialog.sheet {
+  margin: auto auto 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 92dvh;
+  border-radius: 1.75rem 1.75rem 0 0;
+  padding: 0;
+  background: var(--color-paper);
+  color: var(--color-cocoa);
+}
+@media (min-width: 640px) {
+  dialog.sheet {
+    margin: auto;
+    max-width: 30rem;
+    border-radius: 1.75rem;
+  }
+  dialog.sheet.drawer {
+    margin: 0 0 0 auto;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 1.75rem 0 0 1.75rem;
+  }
+}
+dialog.sheet::backdrop {
+  background: rgb(74 58 46 / 0.45);
+}
+dialog.sheet[open] {
+  animation: sheet-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .logo-pop,
+  .hero-photo,
+  dialog.sheet[open] {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
