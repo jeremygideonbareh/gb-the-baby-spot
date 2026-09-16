@@ -99,9 +99,8 @@ export function SectionHead({
         <svg
           data-squiggle
           viewBox="0 0 200 10"
-          preserveAspectRatio="none"
           aria-hidden
-          className="mt-1 block h-2.5 w-[min(14rem,60%)] text-gold"
+          className="mt-1 block w-[min(14rem,60%)] text-gold"
         >
           <path
             d="M2 6c28-5 56 3 84-1s58-6 112 2"

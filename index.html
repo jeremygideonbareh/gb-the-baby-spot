@@ -26,7 +26,9 @@
         justify-content: center;
         gap: 22px;
         background: #fff8ef;
-        animation: loader-out 0.45s ease-in 1.15s both;
+      }
+      html.app-ready #loader {
+        animation: loader-out 0.45s ease-in both;
       }
       #loader svg {
         width: min(72vw, 320px);
@@ -36,11 +38,10 @@
       #loader p {
         margin: 0;
         font:
-          600 15px/1.4 ui-rounded,
-          'Segoe UI',
-          system-ui,
-          sans-serif;
-        letter-spacing: 0.14em;
+          600 17px/1.4 'Fraunces Variable',
+          Georgia,
+          serif;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: #7a5a0f;
         animation: loader-word 0.5s ease-out both;
@@ -99,8 +100,8 @@
         }
       }
       @media (prefers-reduced-motion: reduce) {
-        #loader {
-          animation: loader-out 0.2s linear 0.2s both;
+        html.app-ready #loader {
+          animation: loader-out 0.2s linear both;
         }
         #loader *,
         #loader *::before {

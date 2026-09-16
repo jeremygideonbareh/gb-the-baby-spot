@@ -99,12 +99,14 @@ export function Visit() {
 
           <div className="overflow-hidden rounded-[2rem] bg-paper shadow-soft" data-reveal>
             {showMap ? (
-              <iframe
-                title="Map of Nongthymmai, Shillong"
-                src={address.mapEmbed}
-                loading="lazy"
-                className="aspect-[4/3] w-full border-0"
-              />
+              <div className="p-2 pb-0">
+                <iframe
+                  title="Map of Nongthymmai, Shillong"
+                  src={address.mapEmbed}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full rounded-[1.5rem] border-0"
+                />
+              </div>
             ) : (
               <button
                 type="button"

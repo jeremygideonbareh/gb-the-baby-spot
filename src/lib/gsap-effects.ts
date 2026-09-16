@@ -101,28 +101,30 @@ export function flyToBag(from: HTMLImageElement | null) {
     objectFit: 'cover',
     zIndex: '90',
     pointerEvents: 'none',
+    willChange: 'transform',
   })
   document.body.append(clone)
+  const scale = 44 / start.width
   gsap
     .timeline({ onComplete: () => clone.remove() })
     .to(clone, {
-      left: end.left + end.width / 2 - 22,
-      top: end.top + end.height / 2 - 22,
-      width: 44,
-      height: 44,
+      // transforms only, so the flight stays smooth on slower phones
+      x: end.left + end.width / 2 - (start.left + start.width / 2),
+      y: end.top + end.height / 2 - (start.top + start.height / 2),
+      scale,
       rotate: 14,
       borderRadius: '50%',
       duration: 0.7,
       ease: 'power2.inOut',
     })
-    .to(clone, { autoAlpha: 0, scale: 0.4, duration: 0.18, ease: 'power1.in' }, '-=0.12')
+    .to(clone, { autoAlpha: 0, scale: scale * 0.5, duration: 0.18, ease: 'power1.in' }, '-=0.12')
 }
 
 /** A little wave from the floating WhatsApp button, every so often. */
 export function initWiggle(el: HTMLElement) {
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 9, delay: 5 })
+    const tl = gsap.timeline({ repeat: 1, repeatDelay: 9, delay: 5 })
     tl.to(el, { rotate: -9, duration: 0.14, ease: 'power2.out' })
       .to(el, { rotate: 9, duration: 0.14, ease: 'power2.inOut', repeat: 2, yoyo: true })
       .to(el, { rotate: 0, duration: 0.2, ease: 'power2.out' })

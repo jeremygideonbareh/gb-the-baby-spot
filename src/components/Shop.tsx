@@ -68,16 +68,22 @@ export function Shop({
           </ul>
         ) : (
           active && (
-            <div className="mt-8 mb-4 flex flex-col items-center gap-5 rounded-[2rem] bg-cream p-6 pb-24 text-center ring-1 ring-cocoa/8 sm:flex-row sm:p-8 sm:text-left lg:pb-8">
+            <div className="mt-8 mb-4 flex flex-col items-center gap-5 rounded-[2rem] bg-cream p-6 pb-8 text-center ring-1 ring-cocoa/8 sm:flex-row sm:p-8 sm:text-left">
               <Picture name={active.cover} alt="" sizes="120px" className="size-28 shrink-0 rounded-full object-cover ring-4 ring-paper" />
               <div className="flex-1">
-                <h3 className="text-2xl">Ask for today’s {active.label.toLowerCase()}</h3>
+                <h3 className="text-2xl">Ask for today's {active.label.toLowerCase()}</h3>
                 <p className="mt-2 text-cocoa-soft">
                   We show these in our Instagram highlights rather than online. Message us and we'll send photos of
                   what's in stock.
                 </p>
               </div>
-              <a href={askLink(active.label.toLowerCase())} target="_blank" rel="noopener" className="btn btn-order w-full sm:w-auto">
+              <a
+                href={askLink(active.label.toLowerCase())}
+                target="_blank"
+                rel="noopener"
+                data-fab-avoid
+                className="btn btn-order w-full sm:w-auto"
+              >
                 <WhatsAppIcon className="size-5" /> Ask on WhatsApp
               </a>
             </div>
