@@ -51,11 +51,13 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="container-x mt-10 flex flex-col gap-2 border-t border-cream/15 pt-6 text-[0.95rem] sm:flex-row sm:justify-between">
-        <p>© {new Date().getFullYear()} {site.name}. All photos are our own, from @{site.handle}.</p>
-        <a href="#top" className="inline-flex min-h-11 items-center hover:text-cream hover:underline sm:min-h-0">
-          Back to top
-        </a>
+      <div className="container-x mt-10">
+        <div className="flex flex-col gap-2 border-t border-cream/15 pt-6 text-base sm:flex-row sm:justify-between">
+          <p>© {new Date().getFullYear()} {site.name}. All photos are our own, from @{site.handle}.</p>
+          <a href="#top" className="inline-flex min-h-11 items-center hover:text-cream hover:underline sm:min-h-0">
+            Back to top
+          </a>
+        </div>
       </div>
     </footer>
   )

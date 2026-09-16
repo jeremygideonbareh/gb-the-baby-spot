@@ -110,7 +110,7 @@ export const categories: Category[] = [
     id: 'lunch-boxes',
     highlight: 'Lunch box',
     label: 'Lunch boxes',
-    blurb: 'Steel tiffins that close tight',
+    blurb: 'Steel and character lunch boxes',
     cover: 'hl-lunch-box',
     tint: 'cream',
   },
@@ -126,7 +126,7 @@ export const categories: Category[] = [
     id: 'christmas',
     highlight: 'christmas deals',
     label: 'Christmas deals',
-    blurb: 'Big deals and free gift wrapping',
+    blurb: 'Last season: big deals, free gift wrap',
     cover: 'hl-christmas',
     tint: 'blush',
   },
@@ -136,7 +136,8 @@ export type Product = {
   id: string
   name: string
   description: string
-  category: CategoryId
+  /** Omitted when the post doesn't say which collection it belongs to */
+  category?: CategoryId
   /** image keys from src/data/images.json; first is the card photo */
   images: string[]
   /** null = "DM for price" (no prices were shown on Instagram) */
@@ -236,9 +237,9 @@ export const products: Product[] = [
     postUrl: 'https://www.instagram.com/gbthebabyspot/p/DdEZYf4E12s/',
   },
   {
-    id: 'lilac-rhinestone-bellies',
-    name: 'Lilac sparkle bellies',
-    description: 'Cute lilac bellies with a rhinestone strap and satin bow.',
+    id: 'lilac-rhinestone-ballies',
+    name: 'Lilac sparkle ballies',
+    description: 'Cute lilac ballies with a rhinestone strap and satin bow.',
     category: 'shoes',
     images: ['lilac-bellies', 'lilac-bellies-side'],
     price: null,
@@ -249,7 +250,6 @@ export const products: Product[] = [
     id: 'soft-girl-3-piece-set',
     name: 'Soft girl 3-piece set',
     description: 'A cream flower-button top with denim, for the ultimate soft girl look.',
-    category: 'winter',
     images: ['soft-girl-set'],
     price: null,
     postedOn: '2026-09-08',
@@ -273,7 +273,7 @@ export const sizeOptions = [
 ]
 
 export const marquee = [
-  'Free home delivery', // DEMO PLACEHOLDER: bio says "home service"; "free" not confirmed
+  'Home delivery', // bio: "We provide home service"
   'Order on WhatsApp',
   'Winter wear',
   'Sneakers & shoes',
@@ -291,7 +291,7 @@ export const reasons = [
   },
   {
     title: 'Order on WhatsApp',
-    body: 'Send a photo or a product name. We reply with sizes, colours and price.',
+    body: 'Send a product photo or name to 94363 35562 and ask for sizes, colours and price.',
     icon: 'chat',
   },
   {
@@ -309,11 +309,11 @@ export const reasons = [
 export const seasonal = {
   school: {
     title: 'School essentials',
-    body: 'Backpacks, tiffins and sippers that survive the school run.',
+    body: 'Backpacks, lunch boxes and sipper bottles from our highlights.',
     items: ['school-bags', 'lunch-boxes', 'water-bottles'] as CategoryId[],
   },
   winter: {
     title: 'Winter and Christmas edit',
-    body: 'Warm layers for Shillong mornings, and Christmas gifts wrapped free.', // Christmas highlight: "Free gift wrapping!"
+    body: 'Warm layers for chilly Shillong mornings, fresh from our latest posts.',
   },
 }

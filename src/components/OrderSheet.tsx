@@ -16,6 +16,7 @@ export function OrderSheet({
   onClose: () => void
 }) {
   const dialog = useRef<HTMLDialogElement>(null)
+  const gallery = useRef<HTMLDivElement>(null)
   const { add, open: openBag } = useBag()
   const [size, setSize] = useState('')
   const [colour, setColour] = useState('')
@@ -35,6 +36,7 @@ export function OrderSheet({
       setError(false)
       setAdded(false)
       setPhoto(0)
+      gallery.current?.scrollTo({ left: 0 })
       if (!d.open) d.showModal()
     } else if (d.open) {
       d.close()
@@ -61,56 +63,70 @@ export function OrderSheet({
     >
       {product && line && (
         <div className="relative pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-          <div className="mx-auto mt-2.5 h-1.5 w-12 rounded-full bg-cocoa/15 sm:hidden" aria-hidden />
-          <button
-            type="button"
-            onClick={onClose}
-            className="btn-icon absolute top-3 right-3 z-10 bg-paper/90 ring-1 ring-cocoa/10"
-            aria-label="Close"
-          >
-            <CloseIcon />
-          </button>
+          <div className="flex items-center justify-between px-3 pt-2">
+            <div className="mx-auto h-1.5 w-12 rounded-full bg-cocoa/15 sm:invisible" aria-hidden />
+            <button type="button" onClick={onClose} className="btn-icon shrink-0 hover:bg-cream" aria-label="Close">
+              <CloseIcon />
+            </button>
+          </div>
 
-          <div className="flex gap-4 px-5 pt-4 sm:pt-6">
-            <div className="w-28 shrink-0 sm:w-36">
+          <div
+            ref={gallery}
+            className="swipe-row flex gap-3 overflow-x-auto px-5 pt-1"
+            aria-label="Product photos"
+            onScroll={(e) => {
+              const el = e.currentTarget
+              const slide = el.firstElementChild as HTMLElement | null
+              if (slide) setPhoto(Math.round(el.scrollLeft / (slide.offsetWidth + 12)))
+            }}
+          >
+            {product.images.map((im, i) => (
               <Picture
-                name={product.images[photo]}
-                alt={product.name}
-                sizes="144px"
-                className="aspect-[4/5] w-full rounded-2xl object-cover"
+                key={im}
+                name={im}
+                alt={i === 0 ? product.name : `${product.name}, photo ${i + 1}`}
+                sizes="(min-width: 640px) 300px, 70vw"
+                eager
+                className="aspect-[4/5] max-h-[38vh] w-[70%] shrink-0 rounded-2xl object-cover sm:w-[62%]"
               />
-              {product.images.length > 1 && (
-                <div className="mt-2 flex flex-wrap gap-1.5" role="group" aria-label="More photos">
-                  {product.images.map((im, i) => (
-                    <button
-                      key={im}
-                      type="button"
-                      onClick={() => setPhoto(i)}
-                      aria-label={`Photo ${i + 1}`}
-                      aria-pressed={photo === i}
-                      className="grid size-7 place-items-center"
-                    >
-                      <span className={`block size-2.5 rounded-full ${photo === i ? 'bg-cocoa' : 'bg-cocoa/25'}`} />
-                    </button>
-                  ))}
-                </div>
-              )}
+            ))}
+          </div>
+          {product.images.length > 1 && (
+            <div className="flex justify-center" role="group" aria-label="Choose photo">
+              {product.images.map((im, i) => (
+                <button
+                  key={im}
+                  type="button"
+                  onClick={() => {
+                    const el = gallery.current
+                    const slide = el?.children[i] as HTMLElement | undefined
+                    if (el && slide) el.scrollTo({ left: slide.offsetLeft - 20, behavior: 'smooth' })
+                    setPhoto(i)
+                  }}
+                  aria-label={`Photo ${i + 1} of ${product.images.length}`}
+                  aria-current={photo === i || undefined}
+                  className="grid size-11 place-items-center"
+                >
+                  <span className={`block size-2.5 rounded-full ${photo === i ? 'bg-cocoa' : 'bg-cocoa/25'}`} />
+                </button>
+              ))}
             </div>
-            <div className="min-w-0 pr-10">
-              <h2 id={ids.title} className="text-2xl sm:text-3xl">
-                {product.name}
-              </h2>
-              <p className="mt-1 font-bold text-gold-deep">{priceLabel(product)}</p>
-              <p className="mt-2 text-cocoa-soft">{product.description}</p>
-              <a
-                href={product.postUrl}
-                target="_blank"
-                rel="noopener"
-                className="mt-2 inline-flex min-h-11 items-center gap-1.5 font-bold text-cocoa underline decoration-gold/60 underline-offset-4"
-              >
-                <InstagramIcon className="size-4" /> See the post
-              </a>
-            </div>
+          )}
+
+          <div className="px-5 pt-2">
+            <h2 id={ids.title} className="pr-12 text-2xl sm:text-3xl">
+              {product.name}
+            </h2>
+            <p className="mt-1 font-bold text-gold-deep">{priceLabel(product)}</p>
+            <p className="mt-1 text-cocoa-soft">{product.description}</p>
+            <a
+              href={product.postUrl}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex min-h-11 items-center gap-1.5 font-bold text-cocoa underline decoration-gold/60 underline-offset-4"
+            >
+              <InstagramIcon className="size-4" /> See the post
+            </a>
           </div>
 
           <div className="mt-4 grid gap-4 px-5">
@@ -216,7 +232,7 @@ export function OrderSheet({
               </button>
             )}
           </div>
-          <p className="mt-3 px-5 text-center text-[0.95rem] text-cocoa-soft">
+          <p className="mt-3 px-5 text-center text-base text-cocoa-soft">
             Opens WhatsApp with your order typed out and home delivery requested, ready to send.
           </p>
         </div>

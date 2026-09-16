@@ -6,7 +6,7 @@ import { ArrowIcon, WhatsAppIcon } from './Icons'
 import { Picture } from './ui'
 
 const collage = [
-  { name: 'hero-lilac', alt: 'Lilac sparkle bellies with a rhinestone strap', cls: 'left-[4%] top-[2%] w-[52%] -rotate-6 z-20' },
+  { name: 'hero-lilac', alt: 'Lilac sparkle ballies with a rhinestone strap', cls: 'left-[4%] top-[2%] w-[52%] -rotate-6 z-20' },
   { name: 'hero-wrapper', alt: 'Dino print zip-up baby wrapper', cls: 'right-[2%] top-[8%] w-[44%] rotate-5 z-10' },
   { name: 'hero-pants', alt: 'Dusty pink flare pants with lace and bows at the hem', cls: 'left-[10%] bottom-[2%] w-[42%] rotate-4 z-10' },
   { name: 'hero-bow', alt: 'Cream bow strap shoes', cls: 'right-[6%] bottom-[6%] w-[48%] -rotate-3 z-30' },
@@ -53,9 +53,9 @@ export function Hero() {
               Shop <ArrowIcon className="size-5" />
             </a>
           </div>
-          <ul data-hero-text className="mt-6 hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-[0.95rem] font-semibold text-cocoa-soft">
+          <ul data-hero-text className="mt-6 hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-cocoa-soft">
             <li className="flex items-center gap-2"><Dot /> Home delivery</li>
-            <li className="flex items-center gap-2"><Dot /> Quick replies on WhatsApp</li>
+            <li className="flex items-center gap-2"><Dot /> Order on WhatsApp or call</li>
             <li className="flex items-center gap-2"><Dot /> {address.line1}, Nongthymmai</li>
           </ul>
         </div>

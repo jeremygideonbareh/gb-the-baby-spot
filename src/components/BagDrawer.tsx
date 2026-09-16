@@ -56,7 +56,7 @@ export function BagDrawer() {
                   <Picture name={i.image} alt="" sizes="72px" className="aspect-[4/5] w-18 shrink-0 rounded-xl object-cover" />
                   <div className="min-w-0 flex-1">
                     <p className="leading-snug font-bold">{i.name}</p>
-                    <p className="text-[0.95rem] text-cocoa-soft">
+                    <p className="text-base text-cocoa-soft">
                       {i.colour && `${i.colour} · `}
                       {i.size}
                     </p>
@@ -86,8 +86,8 @@ export function BagDrawer() {
               <a href={waLink(message)} target="_blank" rel="noopener" className="btn btn-order w-full text-lg">
                 <WhatsAppIcon className="size-5" /> Send list on WhatsApp
               </a>
-              <div className="mt-2 flex items-center justify-between text-[0.95rem] text-cocoa-soft">
-                <span>We reply with prices and delivery time.</span>
+              <div className="mt-2 flex items-center justify-between text-base text-cocoa-soft">
+                <span>The shop confirms prices and delivery on WhatsApp.</span>
                 <button type="button" onClick={clear} className="min-h-11 px-2 font-bold underline underline-offset-4">
                   Clear
                 </button>

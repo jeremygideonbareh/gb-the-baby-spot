@@ -88,7 +88,7 @@ export function Visit() {
               sizes="(min-width: 640px) 384px, 92vw"
               className="aspect-[4/5] w-full object-cover"
             />
-            <figcaption className="absolute inset-x-3 bottom-3 rounded-2xl bg-paper/95 p-4 text-[0.95rem]">
+            <figcaption className="absolute inset-x-3 bottom-3 rounded-2xl bg-paper/95 p-4 text-base">
               <span className="font-bold">Look for the Brand Hub sign.</span> Our shop is right below it.
             </figcaption>
           </figure>

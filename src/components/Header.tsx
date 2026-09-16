@@ -27,7 +27,7 @@ export function Header() {
   }, [count])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-cocoa/8 bg-cream/95">
+    <header className="sticky top-0 z-40 border-b border-cocoa/8 bg-cream">
       <div className="container-x flex h-16 items-center justify-between gap-4 sm:h-18">
         <a href="#top" className="flex min-h-11 items-center gap-2.5" aria-label={`${site.name}, back to top`}>
           <Picture

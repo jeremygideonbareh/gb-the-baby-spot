@@ -37,8 +37,8 @@ export function Shop({
           body="The latest pieces from our Instagram. Pick a size and send your order on WhatsApp in a tap."
         />
 
-        <div className="swipe-row -mx-5 mt-8 overflow-x-auto px-5 sm:mx-0 sm:px-0" role="group" aria-label="Filter by category">
-          <div className="flex w-max gap-2 pb-1 sm:w-auto sm:flex-wrap">
+        <div className="swipe-row -mx-5 mt-8 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0" role="group" aria-label="Filter by category">
+          <div className="flex w-max gap-2 pb-1">
             <button type="button" className="chip" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
               All pieces
             </button>
@@ -61,14 +61,14 @@ export function Shop({
         </p>
 
         {visible.length ? (
-          <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+          <ul className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-5">
             {visible.map((p) => (
               <ProductCard key={p.id} product={p} onOrder={onOrder} />
             ))}
           </ul>
         ) : (
           active && (
-            <div className="mt-8 flex flex-col items-center gap-5 rounded-[2rem] bg-cream p-8 text-center ring-1 ring-cocoa/8 sm:flex-row sm:text-left">
+            <div className="mt-8 mb-20 flex flex-col items-center gap-5 rounded-[2rem] bg-cream p-8 text-center ring-1 ring-cocoa/8 sm:flex-row sm:text-left lg:mb-0">
               <Picture name={active.cover} alt="" sizes="120px" className="size-28 shrink-0 rounded-full object-cover ring-4 ring-paper" />
               <div className="flex-1">
                 <h3 className="text-2xl">Ask for today’s {active.label.toLowerCase()}</h3>
@@ -98,10 +98,10 @@ export function ProductCard({ product: p, onOrder }: { product: Product; onOrder
         <Picture
           name={p.images[0]}
           alt={p.name}
-          sizes="(min-width: 1024px) 270px, (min-width: 768px) 30vw, 45vw"
+          sizes="(min-width: 1024px) 220px, (min-width: 768px) 30vw, 45vw"
           className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
-        <span className="absolute top-3 left-3 rounded-full bg-paper/90 px-2.5 py-1 text-xs font-bold text-cocoa">
+        <span className="absolute top-3 left-3 rounded-full bg-paper/95 px-3 py-1 text-sm font-bold text-cocoa">
           {shortDate(p.postedOn)}
         </span>
         <button
@@ -120,18 +120,20 @@ export function ProductCard({ product: p, onOrder }: { product: Product; onOrder
         )}
       </div>
       <h3 className="mt-3 font-sans text-[1.05rem] leading-snug font-bold tracking-normal">{p.name}</h3>
-      <p className="mt-0.5 mb-3 text-[0.95rem] text-cocoa-soft">
+      <p className="mt-0.5 mb-3 text-base text-cocoa-soft">
         {priceLabel(p)}
         {p.colours && <span> · {p.colours.length} colours</span>}
       </p>
       <button
         type="button"
         onClick={() => onOrder(p, 'order')}
-        className="btn btn-order mt-auto min-h-11 w-full gap-1.5 px-2 text-[0.9rem] sm:text-base"
+        className="btn btn-order mt-auto min-h-12 w-full gap-2 px-3"
+        aria-label={`Order ${p.name} on WhatsApp`}
       >
-        <WhatsAppIcon className="size-[1.1rem] shrink-0" />
-        Order on WhatsApp
-        <span className="sr-only">: {p.name}</span>
+        <WhatsAppIcon className="size-5 shrink-0" />
+        <span>
+          Order<span className="hidden md:inline"> on WhatsApp</span>
+        </span>
       </button>
     </li>
   )

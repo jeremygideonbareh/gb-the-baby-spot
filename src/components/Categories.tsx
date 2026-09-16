@@ -45,7 +45,7 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
   })
 
   return (
-    <section ref={section} id="categories" aria-labelledby="cat-title" className="overflow-hidden py-16 sm:py-20 lg:flex lg:min-h-screen lg:flex-col lg:justify-center">
+    <section ref={section} id="categories" aria-labelledby="cat-title" className="overflow-hidden py-16 sm:py-20 lg:pt-24 lg:pb-14">
       <div className="container-x">
         <SectionHead
           id="cat-title"
@@ -80,7 +80,7 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
                   <span className="mt-5 font-display text-2xl font-semibold">{c.label}</span>
                   <span className="mt-1 text-cocoa-soft">{c.blurb}</span>
                   <span className="mt-auto flex w-full items-center justify-between pt-6 font-bold">
-                    <span className="text-[0.95rem]">
+                    <span className="text-base">
                       {count ? `${count} ${count === 1 ? 'style' : 'styles'} online` : 'Ask what’s in stock'}
                     </span>
                     <span className="grid size-11 place-items-center rounded-full bg-cocoa text-cream transition-transform group-hover:translate-x-1">
