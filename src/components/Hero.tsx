@@ -39,6 +39,7 @@ export function Hero() {
   useMotion((m) => {
     const stop = [
       root.current ? m.initHeroScene(root.current) : () => {},
+      root.current ? m.initHeroHandoff(root.current) : () => {},
       cta.current ? m.attachMagnet(cta.current) : () => {},
     ]
     return () => stop.forEach((fn) => fn())
@@ -61,7 +62,7 @@ export function Hero() {
       <Bunting />
 
       <div className="container-x relative grid items-center gap-6 pt-10 pb-10 sm:pt-12 sm:gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:pt-8 lg:pb-8">
-        <div>
+        <div data-hero-copy>
           <p className="eyebrow hero-in">Kids wear · toys · accessories</p>
           <h1
             id="hero-title"
@@ -149,6 +150,7 @@ function Sticker() {
     <div
       aria-hidden
       data-depth="2.6"
+      data-hero-sticker
       className="absolute -top-7 left-[-7%] z-40 hidden size-24 place-items-center rounded-full bg-cocoa text-cream shadow-lift ring-4 ring-cream sm:grid sm:size-28 lg:-top-9 lg:left-[-9%]"
     >
       <svg viewBox="0 0 100 100" className="sticker-spin absolute inset-0 size-full">

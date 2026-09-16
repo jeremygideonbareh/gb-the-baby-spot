@@ -452,3 +452,153 @@ export function initWiggle(el: HTMLElement) {
   })
   return () => mm.revert()
 }
+
+/**
+ * The hero hands over to the shop: the headline lifts away while the collage
+ * photos fly out sideways, as if the shop is opening up behind them.
+ */
+export function initHeroHandoff(section: HTMLElement) {
+  const mm = gsap.matchMedia()
+  mm.add(MOTION_OK, () => {
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: section, start: 'top top', end: '+=90%', scrub: 0.8, pin: true, pinSpacing: true },
+    })
+    tl.to('[data-hero-copy]', { yPercent: -18, autoAlpha: 0, ease: 'power2.in' }, 0)
+      .to('[data-parallax]', {
+        xPercent: (i: number) => (i % 2 ? 85 : -85),
+        yPercent: (i: number) => (i < 2 ? -50 : 55),
+        rotate: (i: number) => (i % 2 ? 16 : -16),
+        scale: 0.82,
+        autoAlpha: 0.15,
+        ease: 'power2.in',
+        stagger: 0.04,
+      }, 0)
+      .to('[data-hero-sticker]', { xPercent: -140, rotate: -90, autoAlpha: 0, ease: 'power2.in' }, 0)
+  })
+  return () => mm.revert()
+}
+
+/**
+ * The story strip: panels travel sideways while their contents drift
+ * vertically, so the page moves in two directions at once.
+ */
+export function initStory(section: HTMLElement, track: HTMLElement) {
+  const mm = gsap.matchMedia()
+
+  mm.add(DESKTOP_MOTION, () => {
+    const panels = gsap.utils.toArray<HTMLElement>('[data-panel]', track)
+    const distance = () => track.scrollWidth - window.innerWidth
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${distance() + window.innerHeight}`,
+        pin: true,
+        scrub: 0.7,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const i = Math.round(self.progress * (panels.length - 1))
+          panels.forEach((p, n) => p.classList.toggle('is-current', n === i))
+        },
+      },
+    })
+    tl.to(track, { x: () => -distance(), ease: 'none' })
+
+    // Vertical counter-motion inside each panel while it travels.
+    panels.forEach((panel) => {
+      const media = panel.querySelector<HTMLElement>('[data-panel-media]')
+      const copy = panel.querySelector<HTMLElement>('[data-panel-copy]')
+      if (media)
+        tl.fromTo(media, { yPercent: 14 }, { yPercent: -14, ease: 'none' }, 0)
+      if (copy) tl.fromTo(copy, { yPercent: -8 }, { yPercent: 8, ease: 'none' }, 0)
+    })
+    return () => panels.forEach((p) => p.classList.remove('is-current'))
+  })
+
+  // Phones read it as a vertical story instead.
+  mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
+    gsap.utils.toArray<HTMLElement>('[data-panel]', track).forEach((panel, i) => {
+      gsap.from(panel, {
+        xPercent: i % 2 ? 12 : -12,
+        autoAlpha: 0,
+        y: 30,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: panel, start: 'top 85%', once: true },
+      })
+      const media = panel.querySelector<HTMLElement>('[data-panel-media]')
+      if (media)
+        gsap.fromTo(
+          media,
+          { yPercent: 8 },
+          { yPercent: -8, ease: 'none', scrollTrigger: { trigger: panel, start: 'top bottom', end: 'bottom top', scrub: 0.6 } },
+        )
+    })
+  })
+
+  return () => mm.revert()
+}
+
+/** Product cards arrive from alternating sides, not just from below. */
+export function initCardsIn(root: HTMLElement) {
+  const mm = gsap.matchMedia()
+  mm.add(MOTION_OK, () => {
+    const cards = gsap.utils.toArray<HTMLElement>('[data-card-in]', root)
+    ScrollTrigger.batch(cards, {
+      start: 'top 92%',
+      once: true,
+      onEnter: (batch) =>
+        gsap.from(batch, {
+          xPercent: (i: number) => (i % 2 ? 22 : -22),
+          yPercent: 12,
+          autoAlpha: 0,
+          rotate: (i: number) => (i % 2 ? 3 : -3),
+          duration: 0.7,
+          ease: 'power3.out',
+          stagger: 0.07,
+          overwrite: true,
+        }),
+    })
+  })
+  return () => mm.revert()
+}
+
+/** Any [data-drift] row slides sideways as its section passes. */
+export function initDrift(root: HTMLElement) {
+  const mm = gsap.matchMedia()
+  mm.add(MOTION_OK, () => {
+    gsap.utils.toArray<HTMLElement>('[data-drift]', root).forEach((el) => {
+      const dir = el.dataset.drift === 'left' ? -1 : 1
+      gsap.fromTo(
+        el,
+        { x: 60 * dir },
+        {
+          x: -60 * dir,
+          ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.8 },
+        },
+      )
+    })
+  })
+  return () => mm.revert()
+}
+
+/** A dashed thread that draws itself down the page as you scroll. */
+export function initThread(path: SVGPathElement) {
+  const mm = gsap.matchMedia()
+  mm.add(MOTION_OK, () => {
+    const length = path.getTotalLength()
+    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })
+    gsap.to(path, {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: path.closest('section') ?? path,
+        start: 'top 80%',
+        end: 'bottom 60%',
+        scrub: 0.5,
+      },
+    })
+  })
+  return () => mm.revert()
+}

@@ -99,7 +99,7 @@ export function ProductCard({ product: p, onOrder }: { product: Product; onOrder
   useMotion((m) => (card.current ? m.attachTilt(card.current) : undefined))
 
   return (
-    <li data-reveal className="flex flex-col">
+    <li data-card-in className="flex flex-col">
       <div ref={card} className="group relative overflow-hidden rounded-[1.5rem] bg-cream shadow-soft" data-mask>
         <Picture
           name={p.images[0]}

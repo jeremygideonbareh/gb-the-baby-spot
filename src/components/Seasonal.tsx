@@ -25,7 +25,7 @@ export function Seasonal({ onOrder, onPick }: { onOrder: (p: Product, mode: 'ord
               <p className="mt-2 max-w-md text-cocoa-soft">{seasonal.school.body}</p>
             </div>
           </div>
-          <ul className="mt-6 grid gap-3 sm:grid-cols-3 sm:gap-5">
+          <ul data-drift="right" className="mt-6 grid gap-3 sm:grid-cols-3 sm:gap-5">
             {school.map((c) => (
               <li key={c.id} data-reveal className="flex items-center gap-4 rounded-[1.5rem] bg-paper p-4 shadow-soft sm:flex-col sm:items-start sm:p-5">
                 <Picture name={c.cover} alt={`${c.label} from our Instagram highlight`} sizes="96px" className="size-20 shrink-0 rounded-2xl object-cover sm:size-24" />

@@ -5,7 +5,7 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { HowItWorks } from './components/HowItWorks'
+import { Story } from './components/Story'
 import { Marquee } from './components/Marquee'
 import { OrderSheet } from './components/OrderSheet'
 import { Seasonal } from './components/Seasonal'
@@ -30,6 +30,8 @@ export default function App() {
       m.initSplitHeadings(main.current),
       m.initImageMasks(main.current),
       m.initSectionTints(main.current),
+      m.initCardsIn(main.current),
+      m.initDrift(main.current),
       progress.current ? m.initScrollProgress(progress.current) : () => {},
     ]
     return () => stop.forEach((fn) => fn())
@@ -66,7 +68,7 @@ export default function App() {
         <Marquee />
         <Categories onPick={pick} />
         <Shop filter={filter} setFilter={setFilter} onOrder={order} />
-        <HowItWorks />
+        <Story />
         <Seasonal onOrder={order} onPick={pick} />
         <WhyUs />
         <Visit />
