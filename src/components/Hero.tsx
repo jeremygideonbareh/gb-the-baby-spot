@@ -15,14 +15,20 @@ const collage = [
 export function Hero() {
   const root = useRef<HTMLElement>(null)
 
-  // Text and photos paint immediately (the settle-in is CSS, see .hero-photo); GSAP only floats the shapes.
-  useMotion(({ gsap }) => {
+  // Text and photos paint immediately (the settle-in is CSS, see .hero-photo);
+  // GSAP adds the drifting shapes and a slow parallax on the collage.
+  useMotion((m) => {
+    const { gsap } = m
+    const stopParallax = root.current ? m.initHeroParallax(root.current) : () => {}
     const mm = gsap.matchMedia()
     mm.add(MOTION_OK, () => {
       gsap.to('[data-float]', { y: -10, rotate: 8, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 })
       gsap.to('[data-float-2]', { y: 8, rotate: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 })
     }, root)
-    return () => mm.revert()
+    return () => {
+      stopParallax()
+      mm.revert()
+    }
   })
 
   const hello = waLink(`Hi ${site.name}! I'd like to order something for my little one. Home delivery please.`)
@@ -53,7 +59,7 @@ export function Hero() {
               Shop <ArrowIcon className="size-5" />
             </a>
           </div>
-          <ul data-hero-text className="mt-6 hidden sm:flex flex-wrap gap-x-5 gap-y-2 text-base font-semibold text-cocoa-soft">
+          <ul data-hero-text className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5 text-base font-semibold text-cocoa-soft">
             <li className="flex items-center gap-2"><Dot /> Home delivery</li>
             <li className="flex items-center gap-2"><Dot /> Order on WhatsApp or call</li>
             <li className="flex items-center gap-2"><Dot /> {address.line1}, Nongthymmai</li>
@@ -64,6 +70,7 @@ export function Hero() {
           {collage.map((c, i) => (
             <div
               key={c.name}
+              data-parallax
               className={`hero-photo absolute overflow-hidden rounded-[1.75rem] bg-paper p-1.5 shadow-lift ${c.cls}`}
               style={{ animationDelay: `${i * 70}ms` }}
             >

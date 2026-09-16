@@ -38,7 +38,7 @@ export function Shop({
         />
 
         <div className="swipe-row -mx-5 mt-8 overflow-x-auto px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0" role="group" aria-label="Filter by category">
-          <div className="flex w-max gap-2 pb-1">
+          <div className="flex w-max gap-2 pb-1 lg:w-auto lg:flex-wrap">
             <button type="button" className="chip" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
               All pieces
             </button>
@@ -68,7 +68,7 @@ export function Shop({
           </ul>
         ) : (
           active && (
-            <div className="mt-8 mb-20 flex flex-col items-center gap-5 rounded-[2rem] bg-cream p-8 text-center ring-1 ring-cocoa/8 sm:flex-row sm:text-left lg:mb-0">
+            <div className="mt-8 mb-4 flex flex-col items-center gap-5 rounded-[2rem] bg-cream p-6 pb-24 text-center ring-1 ring-cocoa/8 sm:flex-row sm:p-8 sm:text-left lg:pb-8">
               <Picture name={active.cover} alt="" sizes="120px" className="size-28 shrink-0 rounded-full object-cover ring-4 ring-paper" />
               <div className="flex-1">
                 <h3 className="text-2xl">Ask for today’s {active.label.toLowerCase()}</h3>
@@ -77,7 +77,7 @@ export function Shop({
                   what's in stock.
                 </p>
               </div>
-              <a href={askLink(active.label.toLowerCase())} target="_blank" rel="noopener" className="btn btn-order">
+              <a href={askLink(active.label.toLowerCase())} target="_blank" rel="noopener" className="btn btn-order w-full sm:w-auto">
                 <WhatsAppIcon className="size-5" /> Ask on WhatsApp
               </a>
             </div>

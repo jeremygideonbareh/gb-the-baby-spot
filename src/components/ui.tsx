@@ -94,8 +94,23 @@ export function SectionHead({
       <p className="eyebrow" data-reveal>
         {eyebrow}
       </p>
-      <h2 id={id} className="mt-3 text-[2.1rem] sm:text-5xl" data-reveal>
+      <h2 id={id} className="relative mt-3 inline-block text-[2.1rem] sm:text-5xl" data-reveal>
         {title}
+        <svg
+          data-squiggle
+          viewBox="0 0 200 10"
+          preserveAspectRatio="none"
+          aria-hidden
+          className="mt-1 block h-2.5 w-[min(14rem,60%)] text-gold"
+        >
+          <path
+            d="M2 6c28-5 56 3 84-1s58-6 112 2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+        </svg>
       </h2>
       {body && (
         <p className="mt-4 text-lg text-cocoa-soft" data-reveal>

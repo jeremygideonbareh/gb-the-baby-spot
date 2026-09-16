@@ -20,7 +20,11 @@ export default function App() {
   const [filter, setFilter] = useState<Filter>('all')
   const [ordering, setOrdering] = useState<{ product: Product; mode: 'order' | 'add' } | null>(null)
 
-  useMotion((m) => (main.current ? m.initReveals(main.current) : undefined))
+  useMotion((m) => {
+    if (!main.current) return
+    const stop = [m.initReveals(main.current), m.initUnderlines(main.current)]
+    return () => stop.forEach((fn) => fn())
+  })
 
   // New cards appear when the filter changes: show them and re-measure pins.
   useMotion(

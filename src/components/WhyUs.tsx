@@ -9,11 +9,11 @@ export function WhyUs() {
   return (
     <section aria-labelledby="why-title" className="defer-render bg-paper py-16 sm:py-24">
       <div className="container-x grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        <div className="relative order-2 mx-auto w-full max-w-md lg:order-1">
+        <div className="relative order-2 mx-auto w-full max-w-sm lg:order-1">
           <Picture
             name="shoe-wall"
             alt="A wall of kids' shoes inside G.B The Baby Spot"
-            sizes="(min-width: 1024px) 420px, 80vw"
+            sizes="(min-width: 1024px) 300px, 70vw"
             className="aspect-[4/5] w-[78%] rounded-[2rem] object-cover shadow-lift"
             data-reveal
           />
@@ -21,7 +21,7 @@ export function WhyUs() {
             <Picture
               name="store-front"
               alt="The shop entrance below the Brand Hub signboard"
-              sizes="200px"
+              sizes="160px"
               className="aspect-[4/5] w-full rounded-[1.2rem] object-cover"
             />
           </div>

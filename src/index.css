@@ -6,7 +6,7 @@
   --color-blush: #f6dce4;
   --color-blush-deep: #e9b8c7;
   --color-gold: #c79a2e;
-  --color-gold-deep: #8a6814;
+  --color-gold-deep: #7a5a0f;
   --color-mint: #a9d8c8;
   --color-mint-soft: #dff1ea;
   --color-sage: #9fb693;
@@ -87,7 +87,7 @@
   }
 
   .chip {
-    @apply inline-flex min-h-11 items-center rounded-full bg-paper px-4 text-[0.95rem] font-bold whitespace-nowrap text-cocoa ring-1 ring-cocoa/15 transition-[transform,background-color] duration-150 hover:ring-cocoa/35 active:scale-95;
+    @apply inline-flex min-h-11 items-center rounded-full bg-paper px-4 text-base font-bold whitespace-nowrap text-cocoa ring-1 ring-cocoa/15 transition-[transform,background-color] duration-150 hover:ring-cocoa/35 active:scale-95;
   }
   .chip[aria-pressed='true'] {
     @apply bg-cocoa text-cream ring-cocoa hover:ring-cocoa;

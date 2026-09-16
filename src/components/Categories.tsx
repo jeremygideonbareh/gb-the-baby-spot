@@ -81,7 +81,7 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
                   <span className="mt-1 text-cocoa-soft">{c.blurb}</span>
                   <span className="mt-auto flex w-full items-center justify-between pt-6 font-bold">
                     <span className="text-base">
-                      {count ? `${count} ${count === 1 ? 'style' : 'styles'} online` : 'Ask what’s in stock'}
+                      {count ? `${count} ${count === 1 ? 'style' : 'styles'} online` : "Ask what's in stock"}
                     </span>
                     <span className="grid size-11 place-items-center rounded-full bg-cocoa text-cream transition-transform group-hover:translate-x-1">
                       <ArrowIcon className="size-5" />

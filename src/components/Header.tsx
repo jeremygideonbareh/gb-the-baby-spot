@@ -59,6 +59,7 @@ export function Header() {
 
         <button
           type="button"
+          id="bag-button"
           onClick={open}
           className="btn-icon relative bg-paper ring-1 ring-cocoa/15 hover:ring-cocoa/30"
           aria-label={`Your list, ${count} ${count === 1 ? 'item' : 'items'}`}

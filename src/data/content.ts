@@ -45,6 +45,9 @@ export const address = {
   pincode: demo('793014'),
   mapUrl:
     'https://www.google.com/maps/search/?api=1&query=Brand+Hub+Nongthymmai+Nongkynriem+Shillong',
+  // DEMO PLACEHOLDER: map centre is the Nongthymmai area, not a surveyed shop pin
+  mapEmbed:
+    'https://www.openstreetmap.org/export/embed.html?bbox=91.8720%2C25.5530%2C91.8940%2C25.5700&layer=mapnik&marker=25.5615%2C91.8830',
 }
 
 // DEMO PLACEHOLDER: opening hours are not listed anywhere on Instagram

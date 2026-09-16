@@ -12,9 +12,137 @@
     <meta property="og:description" content="Everything your little one needs, delivered home. Order on WhatsApp." />
     <meta property="og:image" content="/og.jpg" />
     <link rel="preload" as="image" type="image/webp" href="/img/hero-lilac-480.webp" imagesrcset="/img/hero-lilac-320.webp 320w, /img/hero-lilac-480.webp 480w, /img/hero-lilac-640.webp 640w" imagesizes="(min-width: 1024px) 260px, 45vw" fetchpriority="high" />
+
+    <!-- Loader: little clothes peg themselves onto the line, like the shop's logo.
+         Pure CSS so it plays immediately, and it always leaves within ~1.4s. -->
+    <style>
+      #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: #fff8ef;
+        animation: loader-out 0.45s ease-in 1.15s both;
+      }
+      #loader svg {
+        width: min(72vw, 320px);
+        height: auto;
+        overflow: visible;
+      }
+      #loader p {
+        margin: 0;
+        font:
+          600 15px/1.4 ui-rounded,
+          'Segoe UI',
+          system-ui,
+          sans-serif;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #7a5a0f;
+        animation: loader-word 0.5s ease-out both;
+      }
+      .peg {
+        transform-box: fill-box;
+        transform-origin: 50% 8%;
+        animation:
+          peg-drop 0.45s cubic-bezier(0.2, 1.5, 0.5, 1) both,
+          peg-swing 1.6s ease-in-out 0.45s infinite;
+      }
+      .peg:nth-of-type(2) {
+        animation-delay: 0.1s, 0.55s;
+      }
+      .peg:nth-of-type(3) {
+        animation-delay: 0.2s, 0.65s;
+      }
+      .peg:nth-of-type(4) {
+        animation-delay: 0.3s, 0.75s;
+      }
+      .line-draw {
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
+        animation: draw 0.5s ease-out both;
+      }
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes peg-drop {
+        from {
+          opacity: 0;
+          transform: translateY(-26px) rotate(-16deg);
+        }
+      }
+      @keyframes peg-swing {
+        0%,
+        100% {
+          transform: rotate(-4deg);
+        }
+        50% {
+          transform: rotate(4deg);
+        }
+      }
+      @keyframes loader-word {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      @keyframes loader-out {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #loader {
+          animation: loader-out 0.2s linear 0.2s both;
+        }
+        #loader *,
+        #loader *::before {
+          animation: none !important;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="loader" role="status" aria-label="Loading G.B The Baby Spot">
+      <svg viewBox="0 0 300 150" aria-hidden="true" fill="none">
+        <path class="line-draw" d="M6 34c60 16 228 16 288 0" stroke="#9fb693" stroke-width="3" stroke-linecap="round" />
+        <g class="peg">
+          <rect x="44" y="30" width="6" height="12" rx="3" fill="#c79a2e" />
+          <path d="M31 42h32l-4 34a12 12 0 0 1-12 10h0a12 12 0 0 1-12-10Z" fill="#f6dce4" />
+          <path d="M31 42h32l-3 12H34Z" fill="#e9b8c7" />
+        </g>
+        <g class="peg">
+          <rect x="99" y="34" width="6" height="12" rx="3" fill="#c79a2e" />
+          <path d="M82 46h40l10 14-10 8-4-5v30H86V63l-4 5-10-8Z" fill="#a9d8c8" />
+        </g>
+        <g class="peg">
+          <rect x="169" y="34" width="6" height="12" rx="3" fill="#c79a2e" />
+          <path d="M150 46h44l-6 20v28a8 8 0 0 1-8 8h-16a8 8 0 0 1-8-8V66Z" fill="#f7ebcc" />
+          <circle cx="172" cy="74" r="5" fill="#c79a2e" />
+        </g>
+        <g class="peg">
+          <rect x="234" y="30" width="6" height="12" rx="3" fill="#c79a2e" />
+          <path d="M222 42h30v26a15 15 0 0 1-15 15h0a15 15 0 0 1-15-15Z" fill="#9fb693" />
+          <path d="M222 42h30v9h-30Z" fill="#7f9a72" />
+        </g>
+      </svg>
+      <p>G.B The Baby Spot</p>
+    </div>
     <div id="root"></div>
+    <script>
+      // Belt and braces: if anything stalls, the loader still goes away.
+      setTimeout(function () {
+        var l = document.getElementById('loader')
+        if (l) l.remove()
+      }, 2200)
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

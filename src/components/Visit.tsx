@@ -1,9 +1,12 @@
+import { useState } from 'react'
 import { address, hours, site } from '../data/content'
 import { waLink } from '../lib/whatsapp'
 import { ClockIcon, InstagramIcon, PhoneIcon, PinIcon, WhatsAppIcon } from './Icons'
 import { Picture, SectionHead, T } from './ui'
 
 export function Visit() {
+  const [showMap, setShowMap] = useState(false)
+
   return (
     <section id="visit" aria-labelledby="visit-title" className="defer-render py-16 sm:py-24">
       <div className="container-x">
@@ -81,17 +84,49 @@ export function Visit() {
             </div>
           </div>
 
-          <figure className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] shadow-soft" data-reveal>
+          <div className="grid gap-6">
+          <figure className="relative mx-auto w-full max-w-[20rem] overflow-hidden rounded-[2rem] shadow-soft" data-reveal>
             <Picture
               name="store-hello"
               alt="Our shop front with the 'Hello parents and parents-to-be' sign"
-              sizes="(min-width: 640px) 384px, 92vw"
+              sizes="(min-width: 640px) 320px, 88vw"
               className="aspect-[4/5] w-full object-cover"
             />
             <figcaption className="absolute inset-x-3 bottom-3 rounded-2xl bg-paper/95 p-4 text-base">
               <span className="font-bold">Look for the Brand Hub sign.</span> Our shop is right below it.
             </figcaption>
           </figure>
+
+          <div className="overflow-hidden rounded-[2rem] bg-paper shadow-soft" data-reveal>
+            {showMap ? (
+              <iframe
+                title="Map of Nongthymmai, Shillong"
+                src={address.mapEmbed}
+                loading="lazy"
+                className="aspect-[4/3] w-full border-0"
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowMap(true)}
+                className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(12rem_9rem_at_50%_35%,#dff1ea_0%,#fffdf9_70%)] p-6 text-center transition-transform active:scale-[0.98]"
+              >
+                <span className="grid size-14 place-items-center rounded-full bg-mint-soft text-cocoa">
+                  <PinIcon />
+                </span>
+                <span className="font-display text-2xl font-semibold">Show the map</span>
+                <span className="text-cocoa-soft">Loads only when you tap it</span>
+              </button>
+            )}
+            <p className="px-5 py-3 text-base text-cocoa-soft">
+              Map shows the Nongthymmai area
+              <span className="demo-tag">to confirm</span>
+              <a href={address.mapUrl} target="_blank" rel="noopener" className="ml-1 font-bold text-cocoa underline underline-offset-4">
+                Open in Maps
+              </a>
+            </p>
+          </div>
+          </div>
         </div>
       </div>
     </section>

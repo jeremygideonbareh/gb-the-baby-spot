@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { sizeOptions, type Product } from '../data/content'
 import { useBag } from '../lib/bag'
+import { loadMotion } from '../lib/motion'
 import { orderMessage, waLink } from '../lib/whatsapp'
 import { BagIcon, CloseIcon, InstagramIcon, MinusIcon, PlusIcon, WhatsAppIcon } from './Icons'
 import { Picture } from './ui'
@@ -226,6 +227,8 @@ export function OrderSheet({
                   if (!valid()) return
                   add({ productId: product.id, name: product.name, image: product.images[0], size, colour: colour || undefined, qty })
                   setAdded(true)
+                  const shown = gallery.current?.children[photo]
+                  loadMotion().then(({ flyToBag }) => flyToBag(shown as HTMLImageElement))
                 }}
               >
                 <BagIcon className="size-5" /> Add to your list
