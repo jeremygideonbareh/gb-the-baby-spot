@@ -8,7 +8,7 @@ export function Visit() {
   const [showMap, setShowMap] = useState(false)
 
   return (
-    <section id="visit" aria-labelledby="visit-title" className="defer-render py-16 sm:py-24">
+    <section id="visit" data-tint="#fbf4ea" aria-labelledby="visit-title" className="defer-render py-16 sm:py-24">
       <div className="container-x">
         <SectionHead
           id="visit-title"

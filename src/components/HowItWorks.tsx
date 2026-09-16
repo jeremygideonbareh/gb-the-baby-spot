@@ -40,7 +40,7 @@ export function HowItWorks() {
       ref={section}
       id="how"
       aria-labelledby="how-title"
-      className="relative overflow-hidden bg-paper py-16 sm:py-24 lg:flex lg:min-h-screen lg:flex-col lg:justify-center"
+      className="relative overflow-hidden bg-paper py-16 sm:py-24 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:py-0"
     >
       <div className="container-x">
         <SectionHead

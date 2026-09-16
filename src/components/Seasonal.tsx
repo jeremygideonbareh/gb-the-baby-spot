@@ -9,7 +9,7 @@ export function Seasonal({ onOrder, onPick }: { onOrder: (p: Product, mode: 'ord
   const winter = products.filter((p) => p.category === 'winter')
 
   return (
-    <section id="seasonal" aria-labelledby="seasonal-title" className="defer-render py-16 sm:py-24">
+    <section id="seasonal" data-tint="#f1f7f3" aria-labelledby="seasonal-title" className="defer-render py-16 sm:py-24">
       <div className="container-x">
         <SectionHead
           id="seasonal-title"
@@ -57,7 +57,7 @@ export function Seasonal({ onOrder, onPick }: { onOrder: (p: Product, mode: 'ord
               See all winter wear
             </button>
           </div>
-          <ul className="swipe-row -mx-5 mt-6 flex gap-3 overflow-x-auto px-5 pb-2 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0">
+          <ul className="swipe-row -mx-5 mt-6 flex gap-3 overflow-x-auto px-5 pr-10 pb-2 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0">
             {winter.slice(0, 3).map((p) => (
               <li key={p.id} className="w-[11.5rem] shrink-0 lg:w-auto">
                 <button type="button" onClick={() => onOrder(p, 'order')} className="group block w-full text-left transition-transform active:scale-[0.97]">

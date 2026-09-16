@@ -101,6 +101,31 @@ export function initUnderlines(root: HTMLElement) {
   return () => mm.revert()
 }
 
+/** The page background drifts between brand tints, section by section. */
+export function initSectionTints(root: HTMLElement) {
+  const mm = gsap.matchMedia()
+  mm.add(MOTION_OK, () => {
+    const sections = gsap.utils.toArray<HTMLElement>('[data-tint]', root)
+    sections.forEach((section) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 60%',
+        end: 'bottom 40%',
+        onToggle: (self) => {
+          if (!self.isActive) return
+          gsap.to(document.body, {
+            backgroundColor: section.dataset.tint!,
+            duration: 0.8,
+            ease: 'power1.out',
+            overwrite: true,
+          })
+        },
+      })
+    })
+  })
+  return () => mm.revert()
+}
+
 /** A thin gold line across the top that tracks how far down the page you are. */
 export function initScrollProgress(bar: HTMLElement) {
   const mm = gsap.matchMedia()
@@ -292,7 +317,7 @@ export function initSteps(section: HTMLElement) {
   mm.add(DESKTOP_MOTION, () => {
     const steps = gsap.utils.toArray<HTMLElement>('[data-step]', section)
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: section, start: 'top top', end: '+=1600', pin: true, scrub: 0.6 },
+      scrollTrigger: { trigger: section, start: 'top top', end: '+=900', pin: true, scrub: 0.6 },
     })
     steps.forEach((step, i) => {
       tl.fromTo(
@@ -327,14 +352,18 @@ export function initMarquee(track: HTMLElement) {
   mm.add(MOTION_OK, () => {
     const half = track.scrollWidth / 2
     const loop = gsap.to(track, { x: -half, duration: 26, ease: 'none', repeat: -1 })
+    const setSpeed = gsap.quickTo(loop, 'timeScale', { duration: 0.4, ease: 'power2.out' })
+    let settle = 0
     const st = ScrollTrigger.create({
       onUpdate: (self) => {
-        const v = gsap.utils.clamp(-3.5, 3.5, self.getVelocity() / 260)
-        gsap.to(loop, { timeScale: 1 + Math.abs(v), duration: 0.3, overwrite: true })
-        gsap.to(loop, { timeScale: 1, duration: 1.4, delay: 0.25, overwrite: 'auto' })
+        const v = gsap.utils.clamp(0, 3.5, Math.abs(self.getVelocity()) / 260)
+        setSpeed(1 + v)
+        clearTimeout(settle)
+        settle = window.setTimeout(() => setSpeed(1), 260)
       },
     })
     return () => {
+      clearTimeout(settle)
       loop.kill()
       st.kill()
     }

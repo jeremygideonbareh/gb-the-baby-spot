@@ -16,10 +16,14 @@ export function FloatingWhatsApp() {
     let frame = 0
     const check = () => {
       frame = 0
-      const el = document.querySelector('[data-fab-avoid]')
-      if (!el) return setStepAside(false)
-      const r = el.getBoundingClientRect()
-      setStepAside(r.top < window.innerHeight && r.bottom > window.innerHeight - 160)
+      // The pill lives bottom-right; step aside for anything that would end up underneath it.
+      const zone = { top: window.innerHeight - 150, left: window.innerWidth - 230 }
+      const clash = [...document.querySelectorAll('.btn-order, [data-fab-avoid]')].some((el) => {
+        if (el.closest('[data-fab]') || el.closest('dialog')) return false
+        const r = el.getBoundingClientRect()
+        return r.bottom > zone.top && r.top < window.innerHeight && r.right > zone.left
+      })
+      setStepAside(clash)
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(check)
@@ -47,7 +51,7 @@ export function FloatingWhatsApp() {
 
   if (count > 0) {
     return (
-      <button ref={button as React.Ref<HTMLButtonElement>} type="button" onClick={open} className={cls} aria-hidden={stepAside}>
+      <button ref={button as React.Ref<HTMLButtonElement>} data-fab type="button" onClick={open} className={cls} aria-hidden={stepAside}>
         <WhatsAppIcon className="size-6" /> Send list ({count})
       </button>
     )
@@ -55,6 +59,7 @@ export function FloatingWhatsApp() {
   return (
     <a
       ref={button as React.Ref<HTMLAnchorElement>}
+      data-fab
       href={waLink(`Hi ${site.name}! I'd like to order something for my little one. Home delivery please.`)}
       target="_blank"
       rel="noopener"

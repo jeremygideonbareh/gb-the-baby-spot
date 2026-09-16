@@ -29,6 +29,7 @@ export default function App() {
       m.initUnderlines(main.current),
       m.initSplitHeadings(main.current),
       m.initImageMasks(main.current),
+      m.initSectionTints(main.current),
       progress.current ? m.initScrollProgress(progress.current) : () => {},
     ]
     return () => stop.forEach((fn) => fn())

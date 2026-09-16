@@ -47,17 +47,26 @@ export function Hero() {
   const hello = waLink(`Hi ${site.name}! I'd like to order something for my little one. Home delivery please.`)
 
   return (
-    <section ref={root} id="top" aria-labelledby="hero-title" className="relative overflow-hidden">
+    <section
+      ref={root}
+      id="top"
+      aria-labelledby="hero-title"
+      data-tint="#fff8ef"
+      className="relative flex min-h-[86svh] flex-col justify-center overflow-hidden lg:min-h-[100svh]"
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(30rem_24rem_at_100%_-5%,#f6dce4_0%,transparent_70%),radial-gradient(26rem_22rem_at_-5%_80%,#dff1ea_0%,transparent_70%)]"
       />
       <Bunting />
 
-      <div className="container-x relative grid items-center gap-8 pt-12 pb-16 sm:pt-14 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:pt-16 lg:pb-24">
+      <div className="container-x relative grid items-center gap-6 pt-10 pb-10 sm:pt-12 sm:gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:pt-8 lg:pb-8">
         <div>
           <p className="eyebrow hero-in">Kids wear · toys · accessories</p>
-          <h1 id="hero-title" className="mt-2 text-[2.9rem] leading-[0.95] sm:text-6xl lg:text-[5.2rem]">
+          <h1
+            id="hero-title"
+            className="mt-2 text-[clamp(3.1rem,13vw,5rem)] leading-[0.88] tracking-[-0.03em] lg:text-[clamp(5rem,7.4vw,8rem)]"
+          >
             <span className="block overflow-hidden pb-1">
               <span className="hero-line block">G.B The</span>
             </span>
@@ -91,7 +100,7 @@ export function Hero() {
 
         <div
           data-stage
-          className="relative mx-auto aspect-[1/0.92] w-full max-w-[23rem] sm:aspect-square sm:max-w-[32rem]"
+          className="relative mx-auto aspect-[1/0.92] w-[112%] max-w-none -translate-x-[3%] sm:aspect-square sm:w-full sm:max-w-[32rem] sm:translate-x-0 lg:w-[128%] lg:max-w-none lg:translate-x-[8%]"
         >
           {collage.map((c, i) => (
             <div
@@ -113,14 +122,14 @@ export function Hero() {
           ))}
 
           <Sticker />
-          <Star data-depth="2.2" className="absolute top-[41%] left-[47%] z-40 size-11 text-gold" />
-          <Cloud data-depth="1.2" className="absolute -bottom-3 left-[-3%] z-40 w-20 text-mint" />
+          <Star data-depth="2.2" className="absolute top-[30%] right-[3%] z-40 size-11 text-gold sm:-right-[4%]" />
+          <Cloud data-depth="1.2" className="absolute bottom-[9%] left-[0%] z-40 w-20 text-mint" />
         </div>
       </div>
 
       <a
         href="#categories"
-        className="hero-in container-x relative -mt-6 mb-8 hidden items-center gap-3 text-base font-bold text-cocoa-soft lg:flex"
+        className="hero-in container-x relative mb-6 hidden items-center gap-3 text-base font-bold text-cocoa-soft lg:flex"
       >
         <span className="scroll-cue grid size-11 place-items-center rounded-full ring-1 ring-cocoa/20">
           <ArrowIcon className="size-5 rotate-90" />
@@ -140,7 +149,7 @@ function Sticker() {
     <div
       aria-hidden
       data-depth="2.6"
-      className="absolute -top-3 left-[-5%] z-40 hidden size-24 place-items-center rounded-full bg-cocoa text-cream shadow-lift sm:grid sm:size-28"
+      className="absolute -top-7 left-[-7%] z-40 hidden size-24 place-items-center rounded-full bg-cocoa text-cream shadow-lift ring-4 ring-cream sm:grid sm:size-28 lg:-top-9 lg:left-[-9%]"
     >
       <svg viewBox="0 0 100 100" className="sticker-spin absolute inset-0 size-full">
         <defs>

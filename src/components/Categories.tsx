@@ -26,7 +26,7 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
   )
 
   return (
-    <section ref={section} id="categories" aria-labelledby="cat-title" className="overflow-hidden py-16 sm:py-20 lg:pt-24 lg:pb-14">
+    <section ref={section} id="categories" data-tint="#fdf1f4" aria-labelledby="cat-title" className="overflow-hidden py-16 sm:py-20 lg:pt-24 lg:pb-14">
       <div className="container-x">
         <SectionHead
           id="cat-title"
