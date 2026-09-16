@@ -38,7 +38,7 @@ const panels = [
   {
     kicker: 'Step four',
     title: 'It comes to your door',
-    body: 'We confirm the price, wrap it up and bring it home to you. Or come and say hello below Brand Hub in Nongthymmai.',
+    body: 'We confirm the price, wrap it up and bring it home to you. Or come and say hello below Brand Hub in Nongkhyriem, Nongthymmai.',
     image: 'baby-wrapper-dino',
     icon: TruckIcon,
     tint: 'bg-sage-soft',

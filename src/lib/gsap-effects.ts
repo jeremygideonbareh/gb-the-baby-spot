@@ -1,18 +1,19 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { DESKTOP_MOTION, MOTION_OK } from './motion'
+import { DESKTOP_MOTION, motionOn, MOTION_OK } from './motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export { gsap, ScrollTrigger }
 
-const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const reduced = () => !motionOn()
 
 /**
  * Soft fade/slide-up reveals for every [data-reveal] element.
  * Played once, lightly staggered, never scrubbed.
  */
 export function initReveals(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     // Only hide what the visitor hasn't reached yet; anything already on screen stays put.
@@ -32,6 +33,7 @@ export function initReveals(root: HTMLElement) {
 
 /** Headings arrive a word at a time, rising out from behind a mask. */
 export function initSplitHeadings(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     gsap.utils.toArray<HTMLElement>('[data-split]', root).forEach((heading) => {
@@ -64,6 +66,7 @@ export function initSplitHeadings(root: HTMLElement) {
 
 /** Photos wipe open from the bottom as they scroll into view. */
 export function initImageMasks(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     gsap.utils.toArray<HTMLElement>('[data-mask]', root).forEach((el) => {
@@ -85,6 +88,7 @@ export function initImageMasks(root: HTMLElement) {
 
 /** Hand-drawn underline that draws itself when a section heading arrives. */
 export function initUnderlines(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     gsap.utils.toArray<SVGPathElement>('[data-squiggle] path', root).forEach((path) => {
@@ -103,6 +107,7 @@ export function initUnderlines(root: HTMLElement) {
 
 /** The page background drifts between brand tints, section by section. */
 export function initSectionTints(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     const sections = gsap.utils.toArray<HTMLElement>('[data-tint]', root)
@@ -128,6 +133,7 @@ export function initSectionTints(root: HTMLElement) {
 
 /** A thin gold line across the top that tracks how far down the page you are. */
 export function initScrollProgress(bar: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     gsap.fromTo(
@@ -141,6 +147,7 @@ export function initScrollProgress(bar: HTMLElement) {
 
 /** The hero collage leans towards the pointer and drifts as you scroll away. */
 export function initHeroScene(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
 
   mm.add(MOTION_OK, () => {
@@ -214,6 +221,7 @@ export function initHeroScene(root: HTMLElement) {
 
 /** Product cards tilt with their photo and label lifting off the card. */
 export function attachTilt(el: HTMLElement) {
+  if (!motionOn()) return () => {}
   if (!window.matchMedia(DESKTOP_MOTION).matches) return () => {}
   gsap.set(el, { transformPerspective: 900, transformStyle: 'preserve-3d' })
   const lift = el.querySelector<HTMLElement>('[data-lift]')
@@ -246,6 +254,7 @@ export function attachTilt(el: HTMLElement) {
 
 /** Buttons lean towards the pointer when it gets close. */
 export function attachMagnet(el: HTMLElement) {
+  if (!motionOn()) return () => {}
   if (!window.matchMedia(DESKTOP_MOTION).matches) return () => {}
   const x = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power3.out' })
   const y = gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power3.out' })
@@ -268,6 +277,7 @@ export function attachMagnet(el: HTMLElement) {
 
 /** The category strip turns like a carousel as the pinned section scrolls. */
 export function initCategoryRing(section: HTMLElement, viewport: HTMLElement, track: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(DESKTOP_MOTION, () => {
     const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth)
@@ -313,6 +323,7 @@ export function initCategoryRing(section: HTMLElement, viewport: HTMLElement, tr
 
 /** The three ordering steps play out while the section is pinned. */
 export function initSteps(section: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(DESKTOP_MOTION, () => {
     const steps = gsap.utils.toArray<HTMLElement>('[data-step]', section)
@@ -332,7 +343,7 @@ export function initSteps(section: HTMLElement) {
     tl.to(steps, { autoAlpha: 1, scale: 1, y: 0, duration: 0.6 }, steps.length)
   })
   // Phones just reveal them in sequence.
-  mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(max-width: 1023px)', () => {
     gsap.utils.toArray<HTMLElement>('[data-step]', section).forEach((step) => {
       gsap.from(step, {
         autoAlpha: 0,
@@ -348,6 +359,7 @@ export function initSteps(section: HTMLElement) {
 
 /** The marquee leans into whichever way you're scrolling. */
 export function initMarquee(track: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     const half = track.scrollWidth / 2
@@ -442,6 +454,7 @@ export function burst(x: number, y: number) {
 
 /** A little wave from the floating WhatsApp button, every so often. */
 export function initWiggle(el: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     const tl = gsap.timeline({ repeat: 1, repeatDelay: 9, delay: 5 })
@@ -458,6 +471,7 @@ export function initWiggle(el: HTMLElement) {
  * photos fly out sideways, as if the shop is opening up behind them.
  */
 export function initHeroHandoff(section: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     const tl = gsap.timeline({
@@ -483,6 +497,7 @@ export function initHeroHandoff(section: HTMLElement) {
  * vertically, so the page moves in two directions at once.
  */
 export function initStory(section: HTMLElement, track: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
 
   mm.add(DESKTOP_MOTION, () => {
@@ -516,7 +531,7 @@ export function initStory(section: HTMLElement, track: HTMLElement) {
   })
 
   // Phones read it as a vertical story instead.
-  mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(max-width: 1023px)', () => {
     gsap.utils.toArray<HTMLElement>('[data-panel]', track).forEach((panel, i) => {
       gsap.from(panel, {
         xPercent: i % 2 ? 12 : -12,
@@ -541,6 +556,7 @@ export function initStory(section: HTMLElement, track: HTMLElement) {
 
 /** Product cards arrive from alternating sides, not just from below. */
 export function initCardsIn(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     const cards = gsap.utils.toArray<HTMLElement>('[data-card-in]', root)
@@ -565,6 +581,7 @@ export function initCardsIn(root: HTMLElement) {
 
 /** Any [data-drift] row slides sideways as its section passes. */
 export function initDrift(root: HTMLElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     gsap.utils.toArray<HTMLElement>('[data-drift]', root).forEach((el) => {
@@ -585,6 +602,7 @@ export function initDrift(root: HTMLElement) {
 
 /** A dashed thread that draws itself down the page as you scroll. */
 export function initThread(path: SVGPathElement) {
+  if (!motionOn()) return () => {}
   const mm = gsap.matchMedia()
   mm.add(MOTION_OK, () => {
     const length = path.getTotalLength()

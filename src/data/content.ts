@@ -34,26 +34,30 @@ export const site = {
   showPlaceholderBadges: true,
 }
 
+// Confirmed against the shop's own Google Maps listing (G.B. The Baby Spot),
+// which the owner shared: Nongkhyriem, Nongthymmai, Shillong, Meghalaya 793014.
 export const address = {
-  // From the "New location" highlight: "GB THE BABY SPOT is now shifted to
-  // Nongthymmai Nongkynriem — Below brand hub", and the pinned reel showing
+  // Landmark from the "New location" highlight and the pinned reel, which show
   // the "Brand Hub · 365 Days Discount Store" signboard above the shop.
-  line1: 'Below Brand Hub',
-  line2: 'Nongthymmai Nongkynriem',
+  landmark: 'Below Brand Hub',
+  line1: 'Nongkhyriem, Nongthymmai',
   city: 'Shillong, Meghalaya',
-  // DEMO PLACEHOLDER: pincode not shown on Instagram
-  pincode: demo('793014'),
-  mapUrl:
-    'https://www.google.com/maps/search/?api=1&query=Brand+Hub+Nongthymmai+Nongkynriem+Shillong',
-  // DEMO PLACEHOLDER: map centre is the Nongthymmai area, not a surveyed shop pin
+  pincode: '793014',
+  plusCode: 'HW65+33 Shillong',
+  lat: 25.5602341,
+  lng: 91.9077008,
+  mapUrl: 'https://maps.app.goo.gl/znDmz9TAPebdmcyKA',
   mapEmbed:
-    'https://www.openstreetmap.org/export/embed.html?bbox=91.8720%2C25.5530%2C91.8940%2C25.5700&layer=mapnik&marker=25.5615%2C91.8830',
+    'https://www.openstreetmap.org/export/embed.html?bbox=91.9007%2C25.5562%2C91.9147%2C25.5642&layer=mapnik&marker=25.5602341%2C91.9077008',
 }
 
-// DEMO PLACEHOLDER: opening hours are not listed anywhere on Instagram
+/** Their Google listing rating, at the time of build. */
+export const googleRating = 4.3
+
+// Google lists Wednesday as 9 am – 8:30 pm. The rest of the week is assumed
+// to match and is DEMO PLACEHOLDER until the shop confirms.
 export const hours: { days: string; time: Text }[] = [
-  { days: 'Mon – Sat', time: demo('10:30 am – 7:30 pm') },
-  { days: 'Sunday', time: demo('11:00 am – 5:00 pm') },
+  { days: 'Every day', time: demo('9:00 am – 8:30 pm') },
 ]
 
 export type CategoryId =
@@ -283,7 +287,7 @@ export const marquee = [
   'School bags',
   'Lunch boxes',
   'Water bottles',
-  'Now below Brand Hub, Nongthymmai',
+  'Now below Brand Hub, Nongkhyriem',
 ]
 
 export const reasons = [

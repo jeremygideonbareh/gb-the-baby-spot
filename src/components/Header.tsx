@@ -3,6 +3,7 @@ import { site } from '../data/content'
 import { useBag } from '../lib/bag'
 import { loadMotion, prefersReducedMotion } from '../lib/motion'
 import { BagIcon } from './Icons'
+import { MotionToggle } from './MotionToggle'
 import { Picture } from './ui'
 
 const links = [
@@ -57,24 +58,27 @@ export function Header() {
           </ul>
         </nav>
 
-        <button
-          type="button"
-          id="bag-button"
-          onClick={open}
-          className="btn-icon relative bg-paper ring-1 ring-cocoa/15 hover:ring-cocoa/30"
-          aria-label={`Your list, ${count} ${count === 1 ? 'item' : 'items'}`}
+        <div className="flex items-center gap-2">
+          <MotionToggle />
+          <button
+              type="button"
+              id="bag-button"
+            onClick={open}
+            className="btn-icon relative bg-paper ring-1 ring-cocoa/15 hover:ring-cocoa/30"
+            aria-label={`Your list, ${count} ${count === 1 ? 'item' : 'items'}`}
         >
-          <BagIcon />
-          <span
-            ref={badge}
-            aria-hidden
-            className={`absolute -top-1 -right-1 grid min-w-6 place-items-center rounded-full bg-order px-1.5 text-xs leading-6 font-bold text-white ${
-              count ? '' : 'scale-0'
-            }`}
-          >
-            {count}
-          </span>
+            <BagIcon />
+            <span
+              ref={badge}
+              aria-hidden
+              className={`absolute -top-1 -right-1 grid min-w-6 place-items-center rounded-full bg-order px-1.5 text-xs leading-6 font-bold text-white ${
+                count ? '' : 'scale-0'
+              }`}
+            >
+              {count}
+            </span>
         </button>
+        </div>
       </div>
     </header>
   )

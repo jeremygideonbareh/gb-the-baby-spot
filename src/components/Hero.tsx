@@ -94,7 +94,7 @@ export function Hero() {
               <Dot /> Order on WhatsApp or call
             </li>
             <li className="flex items-center gap-2">
-              <Dot /> {address.line1}, Nongthymmai
+              <Dot /> {address.landmark}, Nongthymmai
             </li>
           </ul>
         </div>

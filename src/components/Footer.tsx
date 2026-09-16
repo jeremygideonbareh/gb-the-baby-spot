@@ -46,7 +46,7 @@ export function Footer() {
               </a>
             </li>
             <li className="py-2.5">
-              {address.line1}, {address.line2}, {address.city}
+              {address.landmark}, {address.line1}, {address.city} {address.pincode}
             </li>
           </ul>
         </div>

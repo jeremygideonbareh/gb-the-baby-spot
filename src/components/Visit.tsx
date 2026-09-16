@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { address, hours, site } from '../data/content'
+import { address, googleRating, hours, site } from '../data/content'
 import { waLink } from '../lib/whatsapp'
 import { ClockIcon, InstagramIcon, PhoneIcon, PinIcon, WhatsAppIcon } from './Icons'
 import { Picture, SectionHead, T } from './ui'
@@ -14,7 +14,7 @@ export function Visit() {
           id="visit-title"
           eyebrow="Visit or message us"
           title="Come say hello"
-          body="We've moved. Find us right below Brand Hub in Nongthymmai, or order from home."
+          body="We've moved. Find us right below Brand Hub in Nongkhyriem, Nongthymmai, or order from home."
         />
 
         <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
@@ -27,9 +27,11 @@ export function Visit() {
                 <dd className="mt-1 pl-[2.125rem] text-cocoa-soft">
                   {site.name}
                   <br />
-                  {address.line1}, {address.line2}
+                  {address.landmark}
                   <br />
-                  {address.city} <T value={address.pincode} />
+                  {address.line1}
+                  <br />
+                  {address.city} {address.pincode}
                 </dd>
               </div>
               <div>
@@ -105,10 +107,9 @@ export function Visit() {
                 <span className="text-cocoa-soft">Loads only when you tap it</span>
               </button>
             )}
-            <p className="px-5 py-3 text-base text-cocoa-soft">
-              Map shows the Nongthymmai area
-              <span className="demo-tag">to confirm</span>
-              <a href={address.mapUrl} target="_blank" rel="noopener" className="ml-1 font-bold text-cocoa underline underline-offset-4">
+            <p className="flex flex-wrap items-center gap-x-2 px-5 py-3 text-base text-cocoa-soft">
+              <span className="font-bold text-cocoa">★ {googleRating}</span> on Google · {address.plusCode}
+              <a href={address.mapUrl} target="_blank" rel="noopener" className="font-bold text-cocoa underline underline-offset-4">
                 Open in Maps
               </a>
             </p>
