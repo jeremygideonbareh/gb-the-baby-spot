@@ -1,6 +1,11 @@
+import { useRef } from 'react'
 import { marquee } from '../data/content'
+import { useMotion } from '../lib/motion'
 
 export function Marquee() {
+  const track = useRef<HTMLDivElement>(null)
+  useMotion((m) => (track.current ? m.initMarquee(track.current) : undefined))
+
   const row = (hidden: boolean) => (
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {marquee.map((m) => (
@@ -15,7 +20,7 @@ export function Marquee() {
   )
   return (
     <div className="overflow-hidden border-y border-cocoa/10 bg-blush/60 py-4" role="region" aria-label="What we offer">
-      <div className="marquee-track flex w-max">
+      <div ref={track} className="marquee-js flex w-max">
         {row(false)}
         {row(true)}
       </div>

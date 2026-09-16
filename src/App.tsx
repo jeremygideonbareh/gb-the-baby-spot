@@ -5,6 +5,7 @@ import { FloatingWhatsApp } from './components/FloatingWhatsApp'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { HowItWorks } from './components/HowItWorks'
 import { Marquee } from './components/Marquee'
 import { OrderSheet } from './components/OrderSheet'
 import { Seasonal } from './components/Seasonal'
@@ -17,12 +18,19 @@ import { useMotion } from './lib/motion'
 
 export default function App() {
   const main = useRef<HTMLElement>(null)
+  const progress = useRef<HTMLDivElement>(null)
   const [filter, setFilter] = useState<Filter>('all')
   const [ordering, setOrdering] = useState<{ product: Product; mode: 'order' | 'add' } | null>(null)
 
   useMotion((m) => {
     if (!main.current) return
-    const stop = [m.initReveals(main.current), m.initUnderlines(main.current)]
+    const stop = [
+      m.initReveals(main.current),
+      m.initUnderlines(main.current),
+      m.initSplitHeadings(main.current),
+      m.initImageMasks(main.current),
+      progress.current ? m.initScrollProgress(progress.current) : () => {},
+    ]
     return () => stop.forEach((fn) => fn())
   })
 
@@ -50,12 +58,14 @@ export default function App() {
       >
         Skip to products
       </a>
+      <div aria-hidden className="fixed inset-x-0 top-0 z-50 h-1 origin-left scale-x-0 bg-gold" ref={progress} />
       <Header />
       <main ref={main}>
         <Hero />
         <Marquee />
         <Categories onPick={pick} />
         <Shop filter={filter} setFilter={setFilter} onOrder={order} />
+        <HowItWorks />
         <Seasonal onOrder={order} onPick={pick} />
         <WhyUs />
         <Visit />

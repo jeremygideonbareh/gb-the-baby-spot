@@ -67,21 +67,6 @@ export function Visit() {
               </a>
             </div>
 
-            <div className="mt-8 rounded-[1.5rem] bg-cream p-5">
-              <p className="font-display text-xl font-semibold">Ordering from home?</p>
-              <ol className="mt-3 grid gap-3 sm:grid-cols-3">
-                {['Pick a piece and its size or age', 'Tap Order on WhatsApp and send', 'We confirm the price and deliver home'].map(
-                  (step, i) => (
-                    <li key={step} className="flex gap-3">
-                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-gold/20 font-bold text-gold-deep">
-                        {i + 1}
-                      </span>
-                      <span className="text-cocoa-soft">{step}</span>
-                    </li>
-                  ),
-                )}
-              </ol>
-            </div>
           </div>
 
           <div className="grid gap-6">

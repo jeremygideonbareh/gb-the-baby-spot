@@ -94,8 +94,10 @@ export function SectionHead({
       <p className="eyebrow" data-reveal>
         {eyebrow}
       </p>
-      <h2 id={id} className="relative mt-3 inline-block text-[2.1rem] sm:text-5xl" data-reveal>
-        {title}
+      <h2 id={id} className="relative mt-3 block text-[2.1rem] sm:text-5xl">
+        <span data-split className="block">
+          {title}
+        </span>
         <svg
           data-squiggle
           viewBox="0 0 200 10"

@@ -100,7 +100,7 @@ export function ProductCard({ product: p, onOrder }: { product: Product; onOrder
 
   return (
     <li data-reveal className="flex flex-col">
-      <div ref={card} className="group relative overflow-hidden rounded-[1.5rem] bg-cream shadow-soft">
+      <div ref={card} className="group relative overflow-hidden rounded-[1.5rem] bg-cream shadow-soft" data-mask>
         <Picture
           name={p.images[0]}
           alt={p.name}
@@ -125,7 +125,7 @@ export function ProductCard({ product: p, onOrder }: { product: Product; onOrder
           </span>
         )}
       </div>
-      <h3 className="mt-3 font-sans text-[1.05rem] leading-snug font-bold tracking-normal">{p.name}</h3>
+      <h3 data-lift className="mt-3 font-sans text-[1.05rem] leading-snug font-bold tracking-normal">{p.name}</h3>
       <p className="mt-0.5 mb-3 text-base text-cocoa-soft">
         {priceLabel(p)}
         {p.colours && <span> · {p.colours.length} colours</span>}

@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { categories, products, type Category, type CategoryId } from '../data/content'
-import { DESKTOP_MOTION, useMotion } from '../lib/motion'
+import { useMotion } from '../lib/motion'
 import { ArrowIcon } from './Icons'
 import { Picture, SectionHead } from './ui'
 
@@ -19,30 +19,11 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
 
   // The site's only pinned moment: a short horizontal strip on desktop.
   // Phones (and reduced motion) keep a native swipe row.
-  useMotion(({ gsap }) => {
-    const mm = gsap.matchMedia()
-    mm.add(DESKTOP_MOTION, () => {
-      const vp = viewport.current!
-      const tr = track.current!
-      const distance = () => Math.max(0, tr.scrollWidth - vp.clientWidth)
-      if (distance() < 40) return
-      vp.classList.add('lg:!overflow-visible')
-      gsap.to(tr, {
-        x: () => -distance(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section.current,
-          start: 'top top',
-          end: () => `+=${distance()}`,
-          pin: true,
-          scrub: 0.6,
-          invalidateOnRefresh: true,
-        },
-      })
-      return () => vp.classList.remove('lg:!overflow-visible')
-    })
-    return () => mm.revert()
-  })
+  useMotion((m) =>
+    section.current && viewport.current && track.current
+      ? m.initCategoryRing(section.current, viewport.current, track.current)
+      : undefined,
+  )
 
   return (
     <section ref={section} id="categories" aria-labelledby="cat-title" className="overflow-hidden py-16 sm:py-20 lg:pt-24 lg:pb-14">
@@ -63,7 +44,7 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
           {categories.map((c) => {
             const count = products.filter((p) => p.category === c.id).length
             return (
-              <li key={c.id} className="w-[15.5rem] sm:w-[17rem] lg:w-[19rem]">
+              <li key={c.id} data-card className="w-[15.5rem] sm:w-[17rem] lg:w-[19rem]">
                 <button
                   type="button"
                   onClick={() => onPick(c.id)}
@@ -77,7 +58,7 @@ export function Categories({ onPick }: { onPick: (id: CategoryId) => void }) {
                       className="size-24 rounded-full border-[3px] border-paper object-cover sm:size-28"
                     />
                   </span>
-                  <span className="mt-5 font-display text-2xl font-semibold">{c.label}</span>
+                  <span data-lift className="mt-5 font-display text-2xl font-semibold">{c.label}</span>
                   <span className="mt-1 text-cocoa-soft">{c.blurb}</span>
                   <span className="mt-auto flex w-full items-center justify-between pt-6 font-bold">
                     <span className="text-base">
